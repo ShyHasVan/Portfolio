@@ -27,7 +27,6 @@
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 30px 30px;
-            cursor: none;
         }
 
         .section {
@@ -111,41 +110,6 @@
             background-color: #0f172a; /* slate-900 */
             border: 1px solid var(--border-color);
         }
-
-        /* Custom Cursor */
-        .cursor {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background-color: var(--primary-color);
-            border-radius: 50%;
-            left: 0;
-            top: 0;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            mix-blend-mode: difference;
-        }
-
-        .cursor-follower {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--primary-color);
-            border-radius: 50%;
-            left: 0;
-            top: 0;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 9998;
-            transition: width 0.3s, height 0.3s, background-color 0.3s;
-        }
-
-        body:hover .cursor-follower.hover-effect {
-            width: 60px;
-            height: 60px;
-            background-color: var(--glow-color);
-        }
         
         /* Headline Animation */
         .animated-headline span {
@@ -165,10 +129,6 @@
 </head>
 <body class="text-slate-300">
 
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-
-    <!-- Header & Navigation -->
     <header id="header" class="bg-black/30 backdrop-blur-lg sticky top-0 z-50 border-b border-white/10">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-white tracking-tight">Shivan Ramharry</a>
@@ -183,7 +143,6 @@
                 <i data-lucide="menu"></i>
             </button>
         </nav>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 border-t border-white/10">
              <a href="#about" class="block text-slate-300 hover:text-white transition duration-300 pt-2">About</a>
              <a href="#skills" class="block text-slate-300 hover:text-white transition duration-300">Skills</a>
@@ -195,14 +154,12 @@
 
     <main class="container mx-auto px-6">
 
-        <!-- Hero Section -->
         <section id="hero" class="relative min-h-screen flex items-center justify-center -mx-6">
             <canvas id="hero-canvas"></canvas>
             <div class="relative z-10 text-center px-6">
                 <div class="max-w-4xl mx-auto">
                     <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 leading-tight animated-headline">
-                        <!-- Spans will be inserted by JS -->
-                    </h1>
+                        </h1>
                     <p class="text-lg md:text-xl text-slate-400 mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="500">
                         Leveraging data to build intelligent solutions and drive business insights.
                     </p>
@@ -214,14 +171,13 @@
             </div>
         </section>
 
-        <!-- About Me Section -->
         <section id="about" class="py-20 md:py-28 section">
             <div data-aos="fade-up">
                 <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white">About Me</h2>
                 <div class="grid md:grid-cols-5 gap-12 items-center">
                     <div class="md:col-span-2" data-aos="fade-right" data-aos-delay="200">
                          <div class="bg-slate-800 rounded-full p-2 shadow-inner">
-                            <img src="https://placehold.co/400x400/020617/e2e8f0?text=SR" alt="Shivan Ramharry" class="rounded-full mx-auto shadow-lg object-cover">
+                             <img src="https://placehold.co/400x400/020617/e2e8f0?text=SR" alt="Shivan Ramharry" class="rounded-full mx-auto shadow-lg object-cover">
                          </div>
                     </div>
                     <div class="md:col-span-3" data-aos="fade-left" data-aos-delay="200">
@@ -232,20 +188,18 @@
                             I am proficient in Python, SQL, and various data science libraries like Pandas and Scikit-learn. I have hands-on experience in developing deep learning models for Natural Language Processing and computer vision tasks. I am currently seeking an entry-level role where I can apply my analytical and technical skills to solve real-world problems.
                         </p>
                         <div class="flex items-center space-x-6">
-                             <a href="#" class="text-slate-400 hover:text-blue-400 transition duration-300" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
-                             <a href="#" class="text-slate-400 hover:text-blue-400 transition duration-300" aria-label="GitHub"><i data-lucide="github" class="w-8 h-8"></i></a>
-                             <a href="mailto:sramharry@gmail.com" class="text-slate-400 hover:text-blue-400 transition duration-300" aria-label="Email"><i data-lucide="mail" class="w-8 h-8"></i></a>
+                              <a href="#" class="text-slate-400 hover:text-blue-400 transition duration-300" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+                              <a href="#" class="text-slate-400 hover:text-blue-400 transition duration-300" aria-label="GitHub"><i data-lucide="github" class="w-8 h-8"></i></a>
+                              <a href="mailto:sramharry@gmail.com" class="text-slate-400 hover:text-blue-400 transition duration-300" aria-label="Email"><i data-lucide="mail" class="w-8 h-8"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Technical Skills Section -->
         <section id="skills" class="py-20 md:py-28 section">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white" data-aos="fade-up">Technical Skills</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Skill Cards -->
                 <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="database" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Data Science & ML</h3><p class="text-sm text-slate-400">Pandas, NumPy, Scikit-learn, TensorFlow/PyTorch</p></div></div>
                 <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="150"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="code" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Languages</h3><p class="text-sm text-slate-400">Python, Java, SQL</p></div></div>
                 <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="terminal-square" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Developer Tools</h3><p class="text-sm text-slate-400">Git, APIs, Agile</p></div></div>
@@ -257,19 +211,16 @@
             </div>
         </section>
 
-        <!-- Technical Projects Section -->
         <section id="projects" class="py-20 md:py-28 section">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-white" data-aos="fade-up">Technical Projects</h2>
             <p class="text-lg text-slate-400 text-center mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Click on a project to learn more about my process and the technologies involved.</p>
             <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
-                 <!-- Project Cards -->
-                <div class="glass-card rounded-xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="200" onclick="openModal('project1')"><div class="p-8 relative z-10"><h3 class="text-2xl font-bold mb-2 text-white">Bank Customer Data Analysis</h3><p class="text-slate-400 mb-4">Engineered a data analysis pipeline to identify key drivers of customer churn and inform risk assessment strategies.</p><div class="flex flex-wrap gap-2 mb-4"><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Python</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Jupyter</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Scikit-learn</span></div><div class="inline-flex items-center text-blue-400 font-semibold group-hover:text-blue-300 transition-colors duration-300">View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></div></div></div>
+                 <div class="glass-card rounded-xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="200" onclick="openModal('project1')"><div class="p-8 relative z-10"><h3 class="text-2xl font-bold mb-2 text-white">Bank Customer Data Analysis</h3><p class="text-slate-400 mb-4">Engineered a data analysis pipeline to identify key drivers of customer churn and inform risk assessment strategies.</p><div class="flex flex-wrap gap-2 mb-4"><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Python</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Jupyter</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Scikit-learn</span></div><div class="inline-flex items-center text-blue-400 font-semibold group-hover:text-blue-300 transition-colors duration-300">View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></div></div></div>
                 <div class="glass-card rounded-xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="300" onclick="openModal('project2')"><div class="p-8 relative z-10"><h3 class="text-2xl font-bold mb-2 text-white">Deep Multitask Learning for News Content</h3><p class="text-slate-400 mb-4">Developed an advanced deep learning model using ROBERTa to simultaneously detect conflicting perspectives and analyse emotional sentiment.</p><div class="flex flex-wrap gap-2 mb-4"><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">NLP</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">ROBERTa</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Deep Learning</span></div><div class="inline-flex items-center text-blue-400 font-semibold group-hover:text-blue-300 transition-colors duration-300">View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></div></div></div>
                 <div class="glass-card rounded-xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="400" onclick="openModal('project3')"><div class="p-8 relative z-10"><h3 class="text-2xl font-bold mb-2 text-white">Image Classification with Deep CNN</h3><p class="text-slate-400 mb-4">Designed, trained, and fine-tuned a deep CNN to classify images from the Flowers-102 dataset with high accuracy.</p><div class="flex flex-wrap gap-2 mb-4"><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">CNN</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Computer Vision</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">TensorFlow</span></div><div class="inline-flex items-center text-blue-400 font-semibold group-hover:text-blue-300 transition-colors duration-300">View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></div></div></div>
             </div>
         </section>
 
-        <!-- Professional Experience Section -->
         <section id="experience" class="py-20 md:py-28 section">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white" data-aos="fade-up">Professional Experience</h2>
             <div class="max-w-3xl mx-auto">
@@ -278,7 +229,6 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="py-20 md:py-28 section">
             <div class="text-center" data-aos="fade-up">
                  <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-white">Get In Touch</h2>
@@ -288,14 +238,12 @@
         </section>
     </main>
 
-    <!-- Project Modals -->
     <div id="project-modals">
         <div id="modal-project1" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" onclick="closeModal('project1')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Bank Customer Data Analysis</h3><button onclick="closeModal('project1')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-400"><p>This project focused on identifying key drivers of customer churn for a banking client. By analyzing a raw dataset, I developed a pipeline to clean, process, and model the data to predict which customers were most likely to leave.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Performed extensive data cleaning and normalization to prepare the dataset for analysis.</li><li>Conducted Exploratory Data Analysis (EDA) to uncover initial patterns and correlations.</li><li>Developed and evaluated several predictive models using Scikit-learn, including Logistic Regression and Random Forest.</li><li>Provided actionable insights that could inform customer retention strategies and reduce churn.</li></ul><a href="#" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
         <div id="modal-project2" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" onclick="closeModal('project2')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Deep Multitask Learning for News Content</h3><button onclick="closeModal('project2')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-400"><p>My dissertation project involved developing a sophisticated deep learning model to tackle two complex NLP tasks simultaneously: detecting conflicting perspectives in news articles and recognizing the emotional sentiment of the text.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Utilized a pre-trained ROBERTa model as the foundation for its strong language understanding capabilities.</li><li>Applied multitask learning techniques, which allows a single model to learn and optimize for multiple objectives, improving generalization.</li><li>Handled nuanced and unstructured text data, demonstrating an ability to work with complex linguistic challenges.</li></ul><a href="#" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
         <div id="modal-project3" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" onclick="closeModal('project3')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Image Classification with Deep CNN</h3><button onclick="closeModal('project3')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-400"><p>This project involved designing, training, and fine-tuning a deep Convolutional Neural Network (CNN) for a computer vision task: classifying images from the challenging Flowers-102 dataset.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Built a custom CNN architecture using TensorFlow/Keras.</li><li>Implemented data augmentation techniques (like rotation, zooming, and flipping) to artificially expand the training dataset.</li><li>This process improved the model's ability to generalize and prevented overfitting, which is a critical practice in machine learning.</li><li>Achieved high classification accuracy on the dataset.</li></ul><a href="#" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-black/30 text-slate-400 -mx-6 rounded-t-3xl border-t border-white/10 mt-16">
         <div class="container mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center">
             <p>&copy; 2025 Shivan Ramharry. All rights reserved.</p>
@@ -328,22 +276,6 @@
                 headline.append(' ');
             }
         });
-
-        // --- Custom Cursor ---
-        const cursor = document.querySelector('.cursor');
-        const follower = document.querySelector('.cursor-follower');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            follower.style.left = e.clientX + 'px';
-            follower.style.top = e.clientY + 'px';
-        });
-        
-        document.querySelectorAll('a, button, .cursor-pointer').forEach(el => {
-            el.addEventListener('mouseenter', () => follower.classList.add('hover-effect'));
-            el.addEventListener('mouseleave', () => follower.classList.remove('hover-effect'));
-        });
-
 
         // --- Interactive Glass Card Effect ---
         document.querySelectorAll('.glass-card').forEach(card => {
@@ -547,4 +479,3 @@
     </script>
 </body>
 </html>
-
