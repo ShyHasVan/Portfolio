@@ -29,6 +29,17 @@
             background-size: 30px 30px;
         }
 
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background-color: var(--primary-color);
+            width: 0%;
+            z-index: 100;
+            transition: width 0.1s linear;
+        }
+
         .section {
             scroll-margin-top: 80px; 
             position: relative;
@@ -128,6 +139,8 @@
     </style>
 </head>
 <body class="text-slate-300">
+
+    <div id="progress-bar"></div>
 
     <header id="header" class="bg-black/30 backdrop-blur-lg sticky top-0 z-50 border-b border-white/10">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -259,6 +272,15 @@
     <script>
         AOS.init({ duration: 800, once: true, });
         lucide.createIcons();
+
+        // --- Scroll Progress Bar ---
+        const progressBar = document.getElementById('progress-bar');
+        function updateProgressBar() {
+            const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (window.scrollY / scrollTotal) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        }
+        window.addEventListener('scroll', updateProgressBar);
 
         // --- Headline Animation ---
         const headline = document.querySelector('.animated-headline');
