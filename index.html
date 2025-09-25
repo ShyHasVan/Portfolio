@@ -45,11 +45,6 @@
             scroll-margin-top: 80px; 
             position: relative;
             overflow: hidden;
-            padding-left: 1.5rem; /* Equivalent to px-6 */
-            padding-right: 1.5rem; /* Equivalent to px-6 */
-            max-width: 1280px; /* Max width to mimic container */
-            margin-left: auto;
-            margin-right: auto;
         }
         
         .glass-card {
@@ -68,7 +63,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(0, 191, 255, 0.2), transparent 80%); /* Updated glow color */
+            background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(0, 191, 255, 0.2), transparent 80%);
             z-index: 0;
             opacity: 0;
             transition: opacity 0.4s;
@@ -80,8 +75,8 @@
 
         .glass-card:hover {
             border-color: var(--primary-color);
-            box-shadow: 0 0 50px rgba(0, 191, 255, 0.2); /* More prominent shadow */
-            transform: translateY(-8px); /* More pronounced lift */
+            box-shadow: 0 0 50px rgba(0, 191, 255, 0.2);
+            transform: translateY(-8px);
         }
 
         #hero-canvas {
@@ -96,7 +91,7 @@
         .btn-primary {
             background-color: var(--primary-color);
             color: var(--bg-color);
-            font-weight: 700; /* Bolder text */
+            font-weight: 700;
             border-radius: 8px;
             padding: 12px 28px;
             transition: all 0.3s ease;
@@ -104,15 +99,15 @@
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px) scale(1.06); /* More pronounced lift and scale */
+            transform: translateY(-3px) scale(1.06);
             box-shadow: 0 0 50px var(--glow-color);
-            color: white; /* Ensure text remains visible on hover */
+            color: white;
         }
 
         .btn-secondary {
             background: transparent;
             color: var(--primary-color);
-            border: 2px solid var(--primary-color); /* Thicker border */
+            border: 2px solid var(--primary-color);
             border-radius: 8px;
             padding: 12px 28px;
             transition: all 0.3s ease;
@@ -120,18 +115,17 @@
         }
 
         .btn-secondary:hover {
-            background-color: rgba(0, 191, 255, 0.2); /* More opaque glow color for background */
+            background-color: rgba(0, 191, 255, 0.2);
             color: #fff;
-            transform: translateY(-3px) scale(1.06); /* More pronounced lift and scale */
+            transform: translateY(-3px) scale(1.06);
             border-color: var(--secondary-color);
         }
 
         .modal-container {
-            background-color: #0f172a; /* slate-900 */
+            background-color: #0f172a;
             border: 1px solid var(--border-color);
         }
         
-        /* Headline Animation */
         .animated-headline span {
             display: inline-block;
             opacity: 0;
@@ -146,28 +140,24 @@
             }
         }
 
-        /* Removed text-shadow from h1 */
-
-        /* Skill icon styling */
         .glass-card .flex i {
             width: 24px;
             height: 24px;
-            color: var(--primary-color); /* Ensure icons are vibrant */
+            color: var(--primary-color);
         }
         .glass-card h3 {
-            font-weight: 700; /* Bolder skill titles */
-            color: var(--text-color); /* Ensure skill titles are bright */
+            font-weight: 700;
+            color: var(--text-color);
         }
         .glass-card p {
-            color: #CBD5E1; /* slate-300 for skill descriptions */
+            color: #CBD5E1;
         }
 
-        /* Experience timeline dot and line */
         .experience-timeline-item .group:hover .bg-slate-700 {
-            background-color: var(--primary-color); /* Highlight line on hover */
+            background-color: var(--primary-color);
         }
         .experience-timeline-item .group:hover .border-slate-700 {
-            border-color: var(--primary-color); /* Highlight dot border on hover */
+            border-color: var(--primary-color);
         }
     </style>
 </head>
@@ -198,22 +188,24 @@
         </div>
     </header>
 
-    <main class="mx-auto max-w-7xl"> <section id="hero" class="relative min-h-screen flex items-center justify-center"> <canvas id="hero-canvas"></canvas>
-            <div class="relative z-10 text-center px-6">
-                <div class="max-w-4xl mx-auto">
-                    <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4 leading-tight animated-headline">
-                        </h1>
-                    <p class="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="500">
-                        Leveraging data to build intelligent solutions and drive business insights.
-                    </p>
-                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4" data-aos="fade-up" data-aos-delay="700">
-                        <a href="#projects" class="w-full sm:w-auto btn-primary text-lg">View My Work</a>
-                        <a href="mailto:sramharry@gmail.com" class="w-full sm:w-auto btn-secondary text-lg">Get In Touch</a>
-                    </div>
+    <section id="hero" class="relative min-h-screen flex items-center justify-center">
+        <canvas id="hero-canvas"></canvas>
+        <div class="relative z-10 text-center px-6">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4 leading-tight animated-headline">
+                </h1>
+                <p class="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="500">
+                    Leveraging data to build intelligent solutions and drive business insights.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4" data-aos="fade-up" data-aos-delay="700">
+                    <a href="#projects" class="w-full sm:w-auto btn-primary text-lg">View My Work</a>
+                    <a href="mailto:sramharry@gmail.com" class="w-full sm:w-auto btn-secondary text-lg">Get In Touch</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
+    <main class="container mx-auto px-6">
         <section id="about" class="py-20 md:py-28 section">
             <div data-aos="fade-up">
                 <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white">About Me</h2>
@@ -287,7 +279,7 @@
         <div id="modal-project3" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" onclick="closeModal('project3')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Image Classification with Deep CNN</h3><button onclick="closeModal('project3')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-300"><p>This project involved designing, training, and fine-tuning a deep Convolutional Neural Network (CNN) for a computer vision task: classifying images from the challenging Flowers-102 dataset.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Built a custom CNN architecture using TensorFlow/Keras.</li><li>Implemented data augmentation techniques (like rotation, zooming, and flipping) to artificially expand the training dataset.</li><li>This process improved the model's ability to generalize and prevented overfitting, which is a critical practice in machine learning.</li><li>Achieved high classification accuracy on the dataset.</li></ul><a href="#" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
     </div>
 
-    <footer class="bg-black/30 text-slate-400 -mx-6 rounded-t-3xl border-t border-white/10 mt-16">
+    <footer class="bg-black/30 text-slate-400 mt-16">
         <div class="container mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center">
             <p class="text-slate-300">&copy; 2025 Shivan Ramharry. All rights reserved.</p>
             <div class="flex items-center space-x-6 mt-4 md:mt-0">
@@ -371,7 +363,6 @@
                     varying float v_noise;
                     varying vec2 v_uv;
 
-                    // 2D simplex noise function
                     vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
                     vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
                     vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
@@ -439,7 +430,7 @@
 
                     void main() {
                         float color_intensity = abs(v_noise) * 0.8 + 0.2;
-                        vec3 color = vec3(0.0, 0.7, 1.0); // More vibrant electric blue base
+                        vec3 color = vec3(0.0, 0.7, 1.0);
                         
                         float grid = 0.0;
                         grid += step(0.9, sin(v_uv.x * 30.0 + u_time));
@@ -481,13 +472,11 @@
         init3D();
         animate3D();
 
-        // --- Mobile Menu ---
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
         mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
 
-        // --- Smooth Scrolling ---
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -498,7 +487,6 @@
             });
         });
 
-        // --- Project Modal Logic ---
         function openModal(projectId) {
             const modal = document.getElementById(`modal-${projectId}`);
             if (modal) {
