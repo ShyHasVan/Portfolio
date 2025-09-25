@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivan Ramharry | Data Analyst & Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #020617; /* Even darker navy */
+            --primary-color: #00A9FF; /* Electric Blue */
+            --secondary-color: #0EA5E9; /* Sky Blue */
+            --glow-color: rgba(0, 169, 255, 0.6);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-color: #e2e8f0; /* Lighter slate */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            cursor: none;
+        }
+
+        .section {
+            scroll-margin-top: 80px; 
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6); /* slate-900/60 */
+            backdrop-filter: blur(16px) saturate(150%);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(0, 169, 255, 0.15), transparent 80%);
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 169, 255, 0.5);
+            box-shadow: 0 0 40px rgba(0, 169, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 12px 28px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 40px var(--glow-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 12px 28px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--glow-color);
+            color: #fff;
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .modal-container {
+            background-color: #0f172a; /* slate-900 */
+            border: 1px solid var(--border-color);
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--primary-color);
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9998;
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+
+        body:hover .cursor-follower.hover-effect {
+            width: 60px;
+            height: 60px;
+            background-color: var(--glow-color);
+        }
+        
+        /* Headline Animation */
+        .animated-headline span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: reveal-text 0.8s forwards;
+        }
+        
+        @keyframes reveal-text {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-300">
+
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-black/30 backdrop-blur-lg sticky top-0 z-50 border-b border-white/10">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white tracking-tight">Shivan Ramharry</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-slate-300 hover:text-white transition duration-300 font-medium">About</a>
+                <a href="#skills" class="text-slate-300 hover:text-white transition duration-300 font-medium">Skills</a>
+                <a href="#projects" class="text-slate-300 hover:text-white transition duration-300 font-medium">Projects</a>
+                <a href="#experience" class="text-slate-300 hover:text-white transition duration-300 font-medium">Experience</a>
+                <a href="#contact" class="btn-primary text-sm font-semibold">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <i data-lucide="menu"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 border-t border-white/10">
+             <a href="#about" class="block text-slate-300 hover:text-white transition duration-300 pt-2">About</a>
+             <a href="#skills" class="block text-slate-300 hover:text-white transition duration-300">Skills</a>
+             <a href="#projects" class="block text-slate-300 hover:text-white transition duration-300">Projects</a>
+             <a href="#experience" class="block text-slate-300 hover:text-white transition duration-300">Experience</a>
+             <a href="#contact" class="block bg-blue-500 text-white text-center mt-2 px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6">
+
+        <!-- Hero Section -->
+        <section id="hero" class="relative min-h-screen flex items-center justify-center -mx-6">
+            <canvas id="hero-canvas"></canvas>
+            <div class="relative z-10 text-center px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 leading-tight animated-headline">
+                        <!-- Spans will be inserted by JS -->
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-400 mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="500">
+                        Leveraging data to build intelligent solutions and drive business insights.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4" data-aos="fade-up" data-aos-delay="700">
+                        <a href="#projects" class="w-full sm:w-auto btn-primary text-lg">View My Work</a>
+                        <a href="mailto:sramharry@gmail.com" class="w-full sm:w-auto btn-secondary text-lg">Get In Touch</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-20 md:py-28 section">
+            <div data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white">About Me</h2>
+                <div class="grid md:grid-cols-5 gap-12 items-center">
+                    <div class="md:col-span-2" data-aos="fade-right" data-aos-delay="200">
+                         <div class="bg-slate-800 rounded-full p-2 shadow-inner">
+                            <img src="https://placehold.co/400x400/020617/e2e8f0?text=SR" alt="Shivan Ramharry" class="rounded-full mx-auto shadow-lg object-cover">
+                         </div>
+                    </div>
+                    <div class="md:col-span-3" data-aos="fade-left" data-aos-delay="200">
+                        <p class="text-lg text-slate-400 mb-4">
+                            I am a Computer Science graduate from the University of York, specializing in data analysis and machine learning. My passion lies in transforming complex datasets into actionable insights and building intelligent systems.
+                        </p>
+                        <p class="text-lg text-slate-400 mb-6">
+                            I am proficient in Python, SQL, and various data science libraries like Pandas and Scikit-learn. I have hands-on experience in developing deep learning models for Natural Language Processing and computer vision tasks. I am currently seeking an entry-level role where I can apply my analytical and technical skills to solve real-world problems.
+                        </p>
+                        <div class="flex items-center space-x-6">
+                             <a href="#" class="text-slate-400 hover:text-blue-400 transition duration-300" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+                             <a href="#" class="text-slate-400 hover:text-blue-400 transition duration-300" aria-label="GitHub"><i data-lucide="github" class="w-8 h-8"></i></a>
+                             <a href="mailto:sramharry@gmail.com" class="text-slate-400 hover:text-blue-400 transition duration-300" aria-label="Email"><i data-lucide="mail" class="w-8 h-8"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Skills Section -->
+        <section id="skills" class="py-20 md:py-28 section">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white" data-aos="fade-up">Technical Skills</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Skill Cards -->
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="database" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Data Science & ML</h3><p class="text-sm text-slate-400">Pandas, NumPy, Scikit-learn, TensorFlow/PyTorch</p></div></div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="150"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="code" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Languages</h3><p class="text-sm text-slate-400">Python, Java, SQL</p></div></div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="terminal-square" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Developer Tools</h3><p class="text-sm text-slate-400">Git, APIs, Agile</p></div></div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="250"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="bot" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">NLP</h3><p class="text-sm text-slate-400">ROBERTa, Text Processing</p></div></div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="image" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Computer Vision</h3><p class="text-sm text-slate-400">CNNs, Image Classification</p></div></div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="350"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="notebook" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Data Analysis</h3><p class="text-sm text-slate-400">Jupyter, Data Cleaning, EDA</p></div></div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="bar-chart-2" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Data Visualisation</h3><p class="text-sm text-slate-400">Matplotlib, Analysis</p></div></div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="450"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="pie-chart" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Statistical Analysis</h3><p class="text-sm text-slate-400">Quantitative insights</p></div></div>
+            </div>
+        </section>
+
+        <!-- Technical Projects Section -->
+        <section id="projects" class="py-20 md:py-28 section">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-white" data-aos="fade-up">Technical Projects</h2>
+            <p class="text-lg text-slate-400 text-center mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Click on a project to learn more about my process and the technologies involved.</p>
+            <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                 <!-- Project Cards -->
+                <div class="glass-card rounded-xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="200" onclick="openModal('project1')"><div class="p-8 relative z-10"><h3 class="text-2xl font-bold mb-2 text-white">Bank Customer Data Analysis</h3><p class="text-slate-400 mb-4">Engineered a data analysis pipeline to identify key drivers of customer churn and inform risk assessment strategies.</p><div class="flex flex-wrap gap-2 mb-4"><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Python</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Jupyter</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Scikit-learn</span></div><div class="inline-flex items-center text-blue-400 font-semibold group-hover:text-blue-300 transition-colors duration-300">View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></div></div></div>
+                <div class="glass-card rounded-xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="300" onclick="openModal('project2')"><div class="p-8 relative z-10"><h3 class="text-2xl font-bold mb-2 text-white">Deep Multitask Learning for News Content</h3><p class="text-slate-400 mb-4">Developed an advanced deep learning model using ROBERTa to simultaneously detect conflicting perspectives and analyse emotional sentiment.</p><div class="flex flex-wrap gap-2 mb-4"><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">NLP</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">ROBERTa</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Deep Learning</span></div><div class="inline-flex items-center text-blue-400 font-semibold group-hover:text-blue-300 transition-colors duration-300">View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></div></div></div>
+                <div class="glass-card rounded-xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="400" onclick="openModal('project3')"><div class="p-8 relative z-10"><h3 class="text-2xl font-bold mb-2 text-white">Image Classification with Deep CNN</h3><p class="text-slate-400 mb-4">Designed, trained, and fine-tuned a deep CNN to classify images from the Flowers-102 dataset with high accuracy.</p><div class="flex flex-wrap gap-2 mb-4"><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">CNN</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Computer Vision</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">TensorFlow</span></div><div class="inline-flex items-center text-blue-400 font-semibold group-hover:text-blue-300 transition-colors duration-300">View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></div></div></div>
+            </div>
+        </section>
+
+        <!-- Professional Experience Section -->
+        <section id="experience" class="py-20 md:py-28 section">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white" data-aos="fade-up">Professional Experience</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="relative pl-8 sm:pl-12 py-6 group" data-aos="fade-left"><div class="absolute left-0 h-full w-0.5 bg-slate-700 group-hover:bg-blue-500 transition-colors duration-300"></div><div class="absolute left-0 -ml-[9px] bg-slate-900 h-5 w-5 rounded-full border-4 border-slate-700 group-hover:border-blue-500 transition-colors duration-300"></div><div class="flex items-center mb-1 sm:mb-0"><h3 class="text-xl font-bold text-white flex-grow">Freelance Developer</h3><p class="text-sm text-slate-500 font-medium">Nov 2021 - Aug 2024</p></div><p class="text-md text-blue-400 font-semibold mb-2">Supertrack | Ballito, South Africa</p><ul class="list-disc pl-5 text-slate-400 space-y-1"><li>Architected and deployed a custom Java and SQL application to digitise and centralise sales and order tracking.</li><li>Improved data integrity by eliminating manual entry errors.</li><li>Refined the application's UI to increase system adoption among staff.</li></ul></div>
+                <div class="relative pl-8 sm:pl-12 py-6 group" data-aos="fade-left" data-aos-delay="100"><div class="absolute left-0 h-full w-0.5 bg-slate-700 group-hover:bg-blue-500 transition-colors duration-300"></div><div class="absolute left-0 -ml-[9px] bg-slate-900 h-5 w-5 rounded-full border-4 border-slate-700 group-hover:border-blue-500 transition-colors duration-300"></div><div class="flex items-center mb-1 sm:mb-0"><h3 class="text-xl font-bold text-white flex-grow">Marketing Officer</h3><p class="text-sm text-slate-500 font-medium">Nov 2024 - Present</p></div><p class="text-md text-blue-400 font-semibold mb-2">University of York Vietnamese Society | York, UK</p><ul class="list-disc pl-5 text-slate-400 space-y-1"><li>Managed strategic collaborations and led website development, enhancing the society's brand and member engagement.</li></ul></div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 md:py-28 section">
+            <div class="text-center" data-aos="fade-up">
+                 <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-white">Get In Touch</h2>
+                 <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">I'm currently seeking new opportunities and would love to hear from you. Whether you have a question or just want to connect, feel free to reach out.</p>
+                 <a href="mailto:sramharry@gmail.com" class="inline-block btn-primary text-lg">Say Hello</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Project Modals -->
+    <div id="project-modals">
+        <div id="modal-project1" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" onclick="closeModal('project1')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Bank Customer Data Analysis</h3><button onclick="closeModal('project1')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-400"><p>This project focused on identifying key drivers of customer churn for a banking client. By analyzing a raw dataset, I developed a pipeline to clean, process, and model the data to predict which customers were most likely to leave.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Performed extensive data cleaning and normalization to prepare the dataset for analysis.</li><li>Conducted Exploratory Data Analysis (EDA) to uncover initial patterns and correlations.</li><li>Developed and evaluated several predictive models using Scikit-learn, including Logistic Regression and Random Forest.</li><li>Provided actionable insights that could inform customer retention strategies and reduce churn.</li></ul><a href="#" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
+        <div id="modal-project2" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" onclick="closeModal('project2')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Deep Multitask Learning for News Content</h3><button onclick="closeModal('project2')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-400"><p>My dissertation project involved developing a sophisticated deep learning model to tackle two complex NLP tasks simultaneously: detecting conflicting perspectives in news articles and recognizing the emotional sentiment of the text.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Utilized a pre-trained ROBERTa model as the foundation for its strong language understanding capabilities.</li><li>Applied multitask learning techniques, which allows a single model to learn and optimize for multiple objectives, improving generalization.</li><li>Handled nuanced and unstructured text data, demonstrating an ability to work with complex linguistic challenges.</li></ul><a href="#" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
+        <div id="modal-project3" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" onclick="closeModal('project3')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Image Classification with Deep CNN</h3><button onclick="closeModal('project3')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-400"><p>This project involved designing, training, and fine-tuning a deep Convolutional Neural Network (CNN) for a computer vision task: classifying images from the challenging Flowers-102 dataset.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Built a custom CNN architecture using TensorFlow/Keras.</li><li>Implemented data augmentation techniques (like rotation, zooming, and flipping) to artificially expand the training dataset.</li><li>This process improved the model's ability to generalize and prevented overfitting, which is a critical practice in machine learning.</li><li>Achieved high classification accuracy on the dataset.</li></ul><a href="#" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black/30 text-slate-400 -mx-6 rounded-t-3xl border-t border-white/10 mt-16">
+        <div class="container mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; 2025 Shivan Ramharry. All rights reserved.</p>
+            <div class="flex items-center space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-blue-400 transition duration-300" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                <a href="#" class="hover:text-blue-400 transition duration-300" aria-label="GitHub"><i data-lucide="github"></i></a>
+                 <a href="mailto:sramharry@gmail.com" class="hover:text-blue-400 transition duration-300" aria-label="Email"><i data-lucide="mail"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, });
+        lucide.createIcons();
+
+        // --- Headline Animation ---
+        const headline = document.querySelector('.animated-headline');
+        const text = "Data Analyst & Machine Learning Specialist";
+        text.split(' ').forEach((word, wordIndex) => {
+            const wordSpan = document.createElement('span');
+            word.split('').forEach((char, charIndex) => {
+                const charSpan = document.createElement('span');
+                charSpan.textContent = char;
+                charSpan.style.animationDelay = `${(wordIndex * 4 + charIndex) * 25}ms`;
+                wordSpan.appendChild(charSpan);
+            });
+            headline.appendChild(wordSpan);
+            if(wordIndex < text.split(' ').length -1) {
+                headline.append(' ');
+            }
+        });
+
+        // --- Custom Cursor ---
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            follower.style.left = e.clientX + 'px';
+            follower.style.top = e.clientY + 'px';
+        });
+        
+        document.querySelectorAll('a, button, .cursor-pointer').forEach(el => {
+            el.addEventListener('mouseenter', () => follower.classList.add('hover-effect'));
+            el.addEventListener('mouseleave', () => follower.classList.remove('hover-effect'));
+        });
+
+
+        // --- Interactive Glass Card Effect ---
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.onmousemove = e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            }
+        });
+
+        // --- 3D Background Animation ---
+        let scene, camera, renderer, plane;
+        let uniforms;
+        const canvas = document.getElementById('hero-canvas');
+        const clock = new THREE.Clock();
+        const mouse = new THREE.Vector2();
+
+        function init3D() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.position.z = 2;
+
+            const geometry = new THREE.PlaneGeometry(15, 15, 100, 100);
+            
+            uniforms = {
+                u_time: { type: "f", value: 1.0 },
+                u_mouse: { type: "v2", value: new THREE.Vector2() },
+                u_resolution: { type: "v2", value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+            };
+
+            const material = new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: `
+                    uniform float u_time;
+                    uniform vec2 u_mouse;
+                    
+                    varying float v_noise;
+                    varying vec2 v_uv;
+
+                    // 2D simplex noise function
+                    vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+                    vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+                    vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
+                    vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+                    float snoise(vec3 v) {
+                        const vec2 C = vec2(1.0/6.0, 1.0/3.0);
+                        const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+                        vec3 i = floor(v + dot(v, C.yyy));
+                        vec3 x0 = v - i + dot(i, C.xxx);
+                        vec3 g = step(x0.yzx, x0.xyz);
+                        vec3 l = 1.0 - g;
+                        vec3 i1 = min(g.xyz, l.zxy);
+                        vec3 i2 = max(g.xyz, l.zxy);
+                        vec3 x1 = x0 - i1 + C.xxx;
+                        vec3 x2 = x0 - i2 + C.yyy;
+                        vec3 x3 = x0 - D.yyy;
+                        i = mod289(i);
+                        vec4 p = permute(permute(permute(
+                            i.z + vec4(0.0, i1.z, i2.z, 1.0))
+                            + i.y + vec4(0.0, i1.y, i2.y, 1.0))
+                            + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+                        float n_ = 0.142857142857;
+                        vec3 ns = n_ * D.wyz - D.xzx;
+                        vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+                        vec4 x_ = floor(j * ns.z);
+                        vec4 y_ = floor(j - 7.0 * x_);
+                        vec4 x = x_ * ns.x + ns.yyyy;
+                        vec4 y = y_ * ns.x + ns.yyyy;
+                        vec4 h = 1.0 - abs(x) - abs(y);
+                        vec4 b0 = vec4(x.xy, y.xy);
+                        vec4 b1 = vec4(x.zw, y.zw);
+                        vec4 s0 = floor(b0) * 2.0 + 1.0;
+                        vec4 s1 = floor(b1) * 2.0 + 1.0;
+                        vec4 sh = -step(h, vec4(0.0));
+                        vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
+                        vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
+                        vec3 p0 = vec3(a0.xy, h.x);
+                        vec3 p1 = vec3(a0.zw, h.y);
+                        vec3 p2 = vec3(a1.xy, h.z);
+                        vec3 p3 = vec3(a1.zw, h.w);
+                        vec4 norm = taylorInvSqrt(vec4(dot(p0, p0), dot(p1, p1), dot(p2, p2), dot(p3, p3)));
+                        p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+                        vec4 m = max(0.6 - vec4(dot(x0, x0), dot(x1, x1), dot(x2, x2), dot(x3, x3)), 0.0);
+                        m = m * m;
+                        return 42.0 * dot(m * m, vec4(dot(p0, x0), dot(p1, x1), dot(p2, x2), dot(p3, x3)));
+                    }
+
+                    void main() {
+                        v_uv = uv;
+                        float mouse_dist = distance(uv, u_mouse);
+                        float z = snoise(vec3(position.x * 0.3, position.y * 0.3, u_time * 0.2)) * 0.5;
+                        z += snoise(vec3(position.x * 0.7, position.y * 0.7, u_time * 0.4)) * 0.25;
+                        z += (1.0 - smoothstep(0.0, 0.2, mouse_dist)) * 1.5;
+
+                        vec3 new_pos = position + vec3(0.0, 0.0, z);
+                        v_noise = z;
+                        
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(new_pos, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    uniform float u_time;
+                    varying float v_noise;
+                    varying vec2 v_uv;
+
+                    void main() {
+                        float color_intensity = abs(v_noise) * 0.8 + 0.2;
+                        vec3 color = vec3(0.0, 0.6, 1.0); // Electric blue base
+                        
+                        float grid = 0.0;
+                        grid += step(0.9, sin(v_uv.x * 30.0 + u_time));
+                        grid += step(0.9, sin(v_uv.y * 30.0 + u_time));
+                        
+                        gl_FragColor = vec4(color * color_intensity + grid * 0.1, 1.0);
+                    }
+                `,
+                wireframe: true
+            });
+
+            plane = new THREE.Mesh(geometry, material);
+            scene.add(plane);
+        }
+
+        function onMouseMove(event) {
+            mouse.x = (event.clientX / window.innerWidth);
+            mouse.y = 1.0 - (event.clientY / window.innerHeight);
+        }
+        window.addEventListener('mousemove', onMouseMove);
+
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+            const elapsedTime = clock.getElapsedTime();
+            uniforms.u_time.value = elapsedTime;
+            uniforms.u_mouse.value.lerp(mouse, 0.1);
+            renderer.render(scene, camera);
+        }
+        
+        function onWindowResize() {
+            if (camera) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+        }
+        window.addEventListener('resize', onWindowResize, false);
+
+        init3D();
+        animate3D();
+
+        // --- Mobile Menu ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+        // --- Smooth Scrolling ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') { window.scrollTo({ top: 0, behavior: 'smooth' }); return; };
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) targetElement.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // --- Project Modal Logic ---
+        function openModal(projectId) {
+            const modal = document.getElementById(`modal-${projectId}`);
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => {
+                    modal.querySelector('.modal-overlay')?.classList.remove('opacity-0');
+                    modal.querySelector('.modal-container')?.classList.remove('scale-95');
+                }, 10);
+            }
+        }
+
+        function closeModal(projectId) {
+            const modal = document.getElementById(`modal-${projectId}`);
+            if (modal) {
+                modal.querySelector('.modal-overlay')?.classList.add('opacity-0');
+                modal.querySelector('.modal-container')?.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+        }
+        
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay:not(.hidden)').forEach(m => closeModal(m.id.split('-')[1]));
+            }
+        });
+    </script>
+</body>
+</html>
+
