@@ -45,6 +45,11 @@
             scroll-margin-top: 80px; 
             position: relative;
             overflow: hidden;
+            padding-left: 1.5rem; /* Equivalent to px-6 */
+            padding-right: 1.5rem; /* Equivalent to px-6 */
+            max-width: 1280px; /* Max width to mimic container */
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .glass-card {
@@ -141,9 +146,7 @@
             }
         }
 
-        h1 {
-            text-shadow: 0 0 15px rgba(0, 191, 255, 0.5); /* Subtle text shadow for pop */
-        }
+        /* Removed text-shadow from h1 */
 
         /* Skill icon styling */
         .glass-card .flex i {
@@ -195,10 +198,7 @@
         </div>
     </header>
 
-    <main class="container mx-auto px-6">
-
-        <section id="hero" class="relative min-h-screen flex items-center justify-center -mx-6">
-            <canvas id="hero-canvas"></canvas>
+    <main class="mx-auto max-w-7xl"> <section id="hero" class="relative min-h-screen flex items-center justify-center"> <canvas id="hero-canvas"></canvas>
             <div class="relative z-10 text-center px-6">
                 <div class="max-w-4xl mx-auto">
                     <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4 leading-tight animated-headline">
