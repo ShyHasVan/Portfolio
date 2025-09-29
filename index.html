@@ -249,10 +249,64 @@
         <section id="projects" class="py-20 md:py-28 section">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-white" data-aos="fade-up">Technical Projects</h2>
             <p class="text-lg text-slate-300 text-center mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Click on a project to learn more about my process and the technologies involved.</p>
-            <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
-                 <div class="glass-card rounded-xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="200" onclick="openModal('project1')"><div class="p-8 relative z-10"><h3 class="text-2xl font-bold mb-2 text-white">Bank Customer Data Analysis</h3><p class="text-slate-300 mb-4">Engineered a data analysis pipeline to identify key drivers of customer churn and inform risk assessment strategies.</p><div class="flex flex-wrap gap-2 mb-4"><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Python</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Jupyter</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Scikit-learn</span></div><div class="inline-flex items-center text-blue-400 font-semibold group-hover:text-blue-300 transition-colors duration-300">View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></div></div></div>
-                <div class="glass-card rounded-xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="300" onclick="openModal('project2')"><div class="p-8 relative z-10"><h3 class="text-2xl font-bold mb-2 text-white">Deep Multitask Learning for News Content</h3><p class="text-slate-300 mb-4">Developed an advanced deep learning model using ROBERTa to simultaneously detect conflicting perspectives and analyse emotional sentiment.</p><div class="flex flex-wrap gap-2 mb-4"><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">NLP</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">ROBERTa</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Deep Learning</span></div><div class="inline-flex items-center text-blue-400 font-semibold group-hover:text-blue-300 transition-colors duration-300">View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></div></div></div>
-                <div class="glass-card rounded-xl overflow-hidden group cursor-pointer" data-aos="fade-up" data-aos-delay="400" onclick="openModal('project3')"><div class="p-8 relative z-10"><h3 class="text-2xl font-bold mb-2 text-white">Image Classification with Deep CNN</h3><p class="text-slate-300 mb-4">Designed, trained, and fine-tuned a deep CNN to classify images from the Flowers-102 dataset with high accuracy.</p><div class="flex flex-wrap gap-2 mb-4"><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">CNN</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Computer Vision</span><span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">TensorFlow</span></div><div class="inline-flex items-center text-blue-400 font-semibold group-hover:text-blue-300 transition-colors duration-300">View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></div></div></div>
+            <div class="grid grid-cols-1 gap-12">
+                <div class="glass-card rounded-xl overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="grid md:grid-cols-2 items-stretch">
+                        <div class="relative overflow-hidden">
+                            <img src="assets/data-graph.png" alt="Bank Customer Data Analysis" class="object-cover w-full h-full min-h-[250px] group-hover:scale-105 transition-transform duration-300">
+                        </div>
+                        <div class="p-8 relative z-10 flex flex-col justify-center">
+                            <h3 class="text-2xl font-bold mb-2 text-white">Bank Customer Data Analysis</h3>
+                            <p class="text-slate-300 mb-4">Engineered a data analysis pipeline to identify key drivers of customer churn and inform risk assessment strategies.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Python</span>
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Jupyter</span>
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Scikit-learn</span>
+                            </div>
+                            <button onclick="openModal('project1')" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 self-start">
+                                View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="grid md:grid-cols-2 items-stretch">
+                        <div class="relative overflow-hidden">
+                            <img src="assets/mnn-graph.jpg" alt="Deep Multitask Learning for News Content" class="object-cover w-full h-full min-h-[250px] group-hover:scale-105 transition-transform duration-300">
+                        </div>
+                        <div class="p-8 relative z-10 flex flex-col justify-center">
+                            <h3 class="text-2xl font-bold mb-2 text-white">Deep Multitask Learning for News Content</h3>
+                            <p class="text-slate-300 mb-4">Developed an advanced deep learning model using ROBERTa to simultaneously detect conflicting perspectives and analyse emotional sentiment.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">NLP</span>
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">ROBERTa</span>
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Deep Learning</span>
+                            </div>
+                            <button onclick="openModal('project2')" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 self-start">
+                                View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden group" data-aos="fade-up" data-aos-delay="400">
+                    <div class="grid md:grid-cols-2 items-stretch">
+                        <div class="relative overflow-hidden">
+                            <img src="assets/cnn-graph.png" alt="Image Classification with Deep CNN" class="object-cover w-full h-full min-h-[250px] group-hover:scale-105 transition-transform duration-300">
+                        </div>
+                        <div class="p-8 relative z-10 flex flex-col justify-center">
+                            <h3 class="text-2xl font-bold mb-2 text-white">Image Classification with Deep CNN</h3>
+                            <p class="text-slate-300 mb-4">Designed, trained, and fine-tuned a deep CNN to classify images from the Flowers-102 dataset with high accuracy.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">CNN</span>
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Computer Vision</span>
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">TensorFlow</span>
+                            </div>
+                            <button onclick="openModal('project3')" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 self-start">
+                                View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
