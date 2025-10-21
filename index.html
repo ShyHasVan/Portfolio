@@ -121,11 +121,16 @@
             border-color: var(--secondary-color);
         }
 
+        .modal-overlay {
+            transition: opacity 0.3s ease-in-out;
+        }
+
         .modal-container {
             background-color: #0f172a;
             border: 1px solid var(--border-color);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
         }
-        
+
         .animated-headline span {
             display: inline-block;
             opacity: 0;
@@ -159,6 +164,73 @@
         .experience-timeline-item .group:hover .border-slate-700 {
             border-color: var(--primary-color);
         }
+
+        /* Back to top button styles */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, box-shadow 0.3s;
+            z-index: 50;
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        #back-to-top:hover {
+            box-shadow: 0 0 35px var(--glow-color);
+            transform: scale(1.1);
+        }
+
+        /* Toast Notification Styles */
+        .toast {
+            background: rgba(8, 14, 28, 0.9);
+            backdrop-filter: blur(10px);
+            color: var(--text-color);
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            animation: slideIn 0.3s ease forwards, slideOut 0.3s ease 2.7s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
     </style>
 </head>
 <body class="text-slate-300">
@@ -167,12 +239,14 @@
 
     <header id="header" class="bg-black/40 backdrop-blur-lg sticky top-0 z-50 border-b border-white/10">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-extrabold text-white tracking-tight">Shivan Ramharry</a>
+            <a href="#" class="text-2xl font-extrabold text-white tracking-tight transition-colors duration-300 hover:text-sky-400">Shivan Ramharry</a>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#about" class="text-slate-200 hover:text-white transition duration-300 font-medium">About</a>
                 <a href="#skills" class="text-slate-200 hover:text-white transition duration-300 font-medium">Skills</a>
                 <a href="#projects" class="text-slate-200 hover:text-white transition duration-300 font-medium">Projects</a>
                 <a href="#experience" class="text-slate-200 hover:text-white transition duration-300 font-medium">Experience</a>
+                <a href="#education" class="text-slate-200 hover:text-white transition duration-300 font-medium">Education</a>
+                <a href="#certifications" class="text-slate-200 hover:text-white transition duration-300 font-medium">Certifications</a>
                 <a href="#contact" class="btn-primary text-sm font-semibold">Contact</a>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-white">
@@ -184,6 +258,8 @@
              <a href="#skills" class="block text-slate-200 hover:text-white transition duration-300">Skills</a>
              <a href="#projects" class="block text-slate-200 hover:text-white transition duration-300">Projects</a>
              <a href="#experience" class="block text-slate-200 hover:text-white transition duration-300">Experience</a>
+             <a href="#education" class="block text-slate-200 hover:text-white transition duration-300">Education</a>
+             <a href="#certifications" class="block text-slate-200 hover:text-white transition duration-300">Certifications</a>
              <a href="#contact" class="block bg-blue-500 text-white text-center mt-2 px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Contact</a>
         </div>
     </header>
@@ -216,11 +292,8 @@
                          </div>
                     </div>
                     <div class="md:col-span-3" data-aos="fade-left" data-aos-delay="200">
-                        <p class="text-lg text-slate-300 mb-4">
-                            Hi, I'm Shivan, a recent Computer Science graduate from the University of York. I'm passionate about the story that data can tell and I love diving into complex datasets to uncover insights that can drive real-world solutions.
-                        </p>
                         <p class="text-lg text-slate-300 mb-6">
-                            My toolkit includes Python, SQL, and libraries like Pandas and Scikit-learn, which I've used to build everything from predictive models for customer behavior to deep learning systems for NLP and computer vision. I'm always excited to learn new technologies and apply my skills to challenging problems. I'm currently looking for an opportunity to join a team where I can contribute to meaningful projects and continue to grow as a developer and data scientist.
+                            Hi, I'm Shivan, a Computer Science graduate from the University of York with a passion for building data-driven solutions. My expertise lies at the intersection of data science and software development, where I enjoy transforming complex datasets into actionable insights and scalable applications. My toolkit includes Python, SQL, and libraries like Pandas and Scikit-learn, and I'm always excited to learn new technologies. I am currently seeking a role in either data science or software engineering where I can contribute to meaningful projects and continue to grow my skills.
                         </p>
                         <div class="flex items-center space-x-6">
                              <a href="https://www.linkedin.com/in/shivan-ramharry-607307323" target="_blank" class="text-slate-400 hover:text-blue-400 transition duration-300" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
@@ -241,7 +314,7 @@
                 <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="250"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="bot" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">NLP</h3><p class="text-sm text-slate-400">ROBERTa, Text Processing</p></div></div>
                 <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="image" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Computer Vision</h3><p class="text-sm text-slate-400">CNNs, Image Classification</p></div></div>
                 <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="350"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="notebook" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Data Analysis</h3><p class="text-sm text-slate-400">Jupyter, Data Cleaning, EDA</p></div></div>
-                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="bar-chart-2" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Data Visualisation</h3><p class="text-sm text-slate-400">Matplotlib, Analysis</p></div></div>
+                <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="bar-chart-2" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Data Visualisation</h3><p class="text-sm text-slate-400">Tableau, Matplotlib, Seaborn</p></div></div>
                 <div class="glass-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="450"><div class="relative z-10"><div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500/10 mb-4"><i data-lucide="pie-chart" class="text-blue-400"></i></div><h3 class="font-semibold text-lg mb-1 text-white">Statistical Analysis</h3><p class="text-sm text-slate-400">Quantitative insights</p></div></div>
             </div>
         </section>
@@ -251,6 +324,26 @@
             <p class="text-lg text-slate-300 text-center mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Click on a project to learn more about my process and the technologies involved.</p>
             <div class="grid grid-cols-1 gap-12">
                 <div class="glass-card rounded-xl overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="grid md:grid-cols-2 items-stretch">
+                        <div class="relative overflow-hidden">
+                            <img src="assets/Feature Importance.png" alt="Feature importance chart for employee churn prediction" class="object-cover w-full h-full min-h-[250px] group-hover:scale-105 transition-transform duration-3  00">
+                        </div>
+                        <div class="p-8 relative z-10 flex flex-col justify-center">
+                            <h3 class="text-2xl font-bold mb-2 text-white">Google Advanced Data Analytics Capstone</h3>
+                            <p class="text-slate-300 mb-4">Developed a predictive model for Salifort Motors to identify key drivers of employee churn, enabling a proactive, data-driven approach to talent retention.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2-5 py-0.5 rounded-full">Python</span>
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2-5 py-0.5 rounded-full">Predictive Analytics</span>
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Data Analysis</span>
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Business Intelligence</span>
+                            </div>
+                            <button onclick="openModal('project4')" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 self-start">
+                                View Details <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl overflow-hidden group" data-aos="fade-up" data-aos-delay="300">
                     <div class="grid md:grid-cols-2 items-stretch">
                         <div class="relative overflow-hidden">
                             <img src="assets/data-graph.png" alt="Bank Customer Data Analysis" class="object-cover w-full h-full min-h-[250px] group-hover:scale-105 transition-transform duration-300">
@@ -269,7 +362,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="glass-card rounded-xl overflow-hidden group" data-aos="fade-up" data-aos-delay="300">
+                <div class="glass-card rounded-xl overflow-hidden group" data-aos="fade-up" data-aos-delay="400">
                     <div class="grid md:grid-cols-2 items-stretch">
                         <div class="relative overflow-hidden">
                             <img src="assets/mnn-graph.png" alt="Deep Multitask Learning for News Content" class="object-cover w-full h-full min-h-[250px] group-hover:scale-105 transition-transform duration-300">
@@ -288,7 +381,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="glass-card rounded-xl overflow-hidden group" data-aos="fade-up" data-aos-delay="400">
+                <div class="glass-card rounded-xl overflow-hidden group" data-aos="fade-up" data-aos-delay="500">
                     <div class="grid md:grid-cols-2 items-stretch">
                         <div class="relative overflow-hidden">
                             <img src="assets/cnn-graph.png" alt="Image Classification with Deep CNN" class="object-cover w-full h-full min-h-[250px] group-hover:scale-105 transition-transform duration-300">
@@ -314,7 +407,55 @@
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white" data-aos="fade-up">Professional Experience</h2>
             <div class="max-w-3xl mx-auto">
                 <div class="relative pl-8 sm:pl-12 py-6 group experience-timeline-item" data-aos="fade-left"><div class="absolute left-0 h-full w-0.5 bg-slate-700 group-hover:bg-blue-500 transition-colors duration-300"></div><div class="absolute left-0 -ml-[9px] bg-slate-900 h-5 w-5 rounded-full border-4 border-slate-700 group-hover:border-blue-500 transition-colors duration-300"></div><div class="flex items-center mb-1 sm:mb-0"><h3 class="text-xl font-bold text-white flex-grow">Freelance Developer</h3><p class="text-sm text-slate-500 font-medium">Nov 2021 - Aug 2024</p></div><p class="text-md text-blue-400 font-semibold mb-2">Supertrack | Ballito, South Africa</p><ul class="list-disc pl-5 text-slate-300 space-y-1"><li>Architected and deployed a custom Java and SQL application to digitise and centralise sales and order tracking.</li><li>Improved data integrity by eliminating manual entry errors.</li><li>Refined the application's UI to increase system adoption among staff.</li></ul></div>
-                <div class="relative pl-8 sm:pl-12 py-6 group experience-timeline-item" data-aos="fade-left" data-aos-delay="100"><div class="absolute left-0 h-full w-0.5 bg-slate-700 group-hover:bg-blue-500 transition-colors duration-300"></div><div class="absolute left-0 -ml-[9px] bg-slate-900 h-5 w-5 rounded-full border-4 border-slate-700 group-hover:border-blue-500 transition-colors duration-300"></div><div class="flex items-center mb-1 sm:mb-0"><h3 class="text-xl font-bold text-white flex-grow">Marketing Officer</h3><p class="text-sm text-slate-500 font-medium">Nov 2024 - June 2025</p></div><p class="text-md text-blue-400 font-semibold mb-2">University of York Vietnamese Society | York, UK</p><ul class="list-disc pl-5 text-slate-300 space-y-1"><li>Managed strategic collaborations and led website development, enhancing the society's brand and member engagement.</li></ul></div>
+                <div class="relative pl-8 sm:pl-12 py-6 group experience-timeline-item" data-aos="fade-left" data-aos-delay="100"><div class="absolute left-0 h-full w-0.5 bg-slate-700 group-hover:bg-blue-500 transition-colors duration-300"></div><div class="absolute left-0 -ml-[9px] bg-slate-900 h-5 w-5 rounded-full border-4 border-slate-700 group-hover:border-blue-500 transition-colors duration-300"></div><div class="flex items-center mb-1 sm:mb-0"><h3 class="text-xl font-bold text-white flex-grow">Marketing Officer</h3><p class="text-sm text-slate-500 font-medium">Oct 2022 - Jun 2023</p></div><p class="text-md text-blue-400 font-semibold mb-2">University of York Vietnamese Society | York, UK</p><ul class="list-disc pl-5 text-slate-300 space-y-1"><li>Managed strategic collaborations and led website development, enhancing the society's brand and member engagement.</li></ul></div>
+            </div>
+        </section>
+
+        <section id="education" class="py-20 md:py-28 section">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white" data-aos="fade-up">Education</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-card rounded-xl overflow-hidden group" data-aos="fade-up">
+                    <div class="grid md:grid-cols-3 items-center gap-8 p-4 md:p-0">
+                        <div class="md:col-span-1 p-4">
+                             <img src="assets/york.png" alt="University of York Logo" class="rounded-lg mx-auto w-full max-w-[200px] md:max-w-full">
+                        </div>
+                        <div class="md:col-span-2 p-4 relative z-10">
+                            <h3 class="text-2xl font-bold mb-1 text-white">BSc (Hons) Computer Science</h3>
+                            <p class="text-slate-400 mb-2 font-medium">University of York, Constantine College | 2022 - 2025</p>
+                            <p class="text-slate-300 mb-4">
+                                Achieved a Second Class Honours: Division One. Gained a comprehensive understanding of the full software development lifecycle, alongside a specialist focus on intelligent systems, machine learning, and data science.
+                            </p>
+                             <div class="flex flex-wrap gap-2">
+                                 <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Machine Learning</span>
+                                 <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Data Science</span>
+                                 <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Software Engineering</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="py-20 md:py-28 section">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white" data-aos="fade-up">Certifications & Achievements</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-card rounded-xl overflow-hidden group" data-aos="fade-up">
+                    <div class="grid md:grid-cols-3 items-center gap-8 p-4 md:p-0">
+                        <div class="md:col-span-1">
+                             <img src="assets/google-advanced-data-analytics-certificate.jpg" alt="Google Advanced Data Analytics Certificate" class="rounded-lg mx-auto shadow-lg w-full max-w-[250px] md:max-w-full">
+                        </div>
+                        <div class="md:col-span-2 p-4 relative z-10">
+                            <h3 class="text-2xl font-bold mb-2 text-white">Google Advanced Data Analytics</h3>
+                            <p class="text-slate-400 mb-2 font-medium">Issued by Google & Coursera | Oct 2025</p>
+                            <p class="text-slate-300 mb-4">
+                                Completed a rigorous, hands-on program covering advanced data analysis, machine learning, predictive modeling, and statistical techniques to extract insights from large datasets.
+                            </p>
+                            <a href="assets/Google Certificate.pdf" target="_blank" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 self-start group">
+                                View Certificate <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -328,9 +469,10 @@
     </main>
 
     <div id="project-modals">
-        <div id="modal-project1" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" onclick="closeModal('project1')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Bank Customer Data Analysis</h3><button onclick="closeModal('project1')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-300"><p>This project focused on identifying key drivers of customer churn for a banking client. By analyzing a raw dataset, I developed a pipeline to clean, process, and model the data to predict which customers were most likely to leave.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Performed extensive data cleaning and normalization to prepare the dataset for analysis.</li><li>Conducted Exploratory Data Analysis (EDA) to uncover initial patterns and correlations.</li><li>Developed and evaluated several predictive models using Scikit-learn, including Logistic Regression and Random Forest.</li><li>Provided actionable insights that could inform customer retention strategies and reduce churn.</li></ul><a href="https://github.com/ShyHasVan/Data-Project" target="_blank" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
-        <div id="modal-project2" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" onclick="closeModal('project2')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Deep Multitask Learning for News Content</h3><button onclick="closeModal('project2')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-300"><p>My dissertation project involved developing a sophisticated deep learning model to tackle two complex NLP tasks simultaneously: detecting conflicting perspectives in news articles and recognizing the emotional sentiment of the text.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Utilized a pre-trained ROBERTa model as the foundation for its strong language understanding capabilities.</li><li>Applied multitask learning techniques, which allows a single model to learn and optimize for multiple objectives, improving generalization.</li><li>Handled nuanced and unstructured text data, demonstrating an ability to work with complex linguistic challenges.</li></ul><a href="https://github.com/ShyHasVan/MNN" target="_blank" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
-        <div id="modal-project3" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" onclick="closeModal('project3')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Image Classification with Deep CNN</h3><button onclick="closeModal('project3')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-300"><p>This project involved designing, training, and fine-tuning a deep Convolutional Neural Network (CNN) for a computer vision task: classifying images from the challenging Flowers-102 dataset.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Built a custom CNN architecture using TensorFlow/Keras.</li><li>Implemented data augmentation techniques (like rotation, zooming, and flipping) to artificially expand the training dataset.</li><li>This process improved the model's ability to generalize and prevented overfitting, which is a critical practice in machine learning.</li><li>Achieved high classification accuracy on the dataset.</li></ul><a href="https://github.com/ShyHasVan/CNN" target="_blank" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
+        <div id="modal-project1" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-[60] opacity-0" onclick="closeModal('project1')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl opacity-0 scale-95" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Bank Customer Data Analysis</h3><button onclick="closeModal('project1')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-300"><p>This project focused on identifying key drivers of customer churn for a banking client. By analyzing a raw dataset, I developed a pipeline to clean, process, and model the data to predict which customers were most likely to leave.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Performed extensive data cleaning and normalization to prepare the dataset for analysis.</li><li>Conducted Exploratory Data Analysis (EDA) to uncover initial patterns and correlations.</li><li>Developed and evaluated several predictive models using Scikit-learn, including Logistic Regression and Random Forest.</li><li>Provided actionable insights that could inform customer retention strategies and reduce churn.</li></ul><a href="https://github.com/ShyHasVan/Data-Project" target="_blank" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
+        <div id="modal-project2" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-[60] opacity-0" onclick="closeModal('project2')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl opacity-0 scale-95" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Deep Multitask Learning for News Content</h3><button onclick="closeModal('project2')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-300"><p>My dissertation project involved developing a sophisticated deep learning model to tackle two complex NLP tasks simultaneously: detecting conflicting perspectives in news articles and recognizing the emotional sentiment of the text.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Utilized a pre-trained ROBERTa model as the foundation for its strong language understanding capabilities.</li><li>Applied multitask learning techniques, which allows a single model to learn and optimize for multiple objectives, improving generalization.</li><li>Handled nuanced and unstructured text data, demonstrating an ability to work with complex linguistic challenges.</li></ul><a href="https://github.com/ShyHasVan/MNN" target="_blank" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
+        <div id="modal-project3" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-[60] opacity-0" onclick="closeModal('project3')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl opacity-0 scale-95" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Image Classification with Deep CNN</h3><button onclick="closeModal('project3')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-300"><p>This project involved designing, training, and fine-tuning a deep Convolutional Neural Network (CNN) for a computer vision task: classifying images from the challenging Flowers-102 dataset.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Built a custom CNN architecture using TensorFlow/Keras.</li><li>Implemented data augmentation techniques (like rotation, zooming, and flipping) to artificially expand the training dataset.</li><li>This process improved the model's ability to generalize and prevented overfitting, which is a critical practice in machine learning.</li><li>Achieved high classification accuracy on the dataset.</li></ul><a href="https://github.com/ShyHasVan/CNN" target="_blank" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
+        <div id="modal-project4" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-[60] opacity-0" onclick="closeModal('project4')"><div class="modal-container w-full max-w-2xl mx-auto p-8 rounded-xl opacity-0 scale-95" onclick="event.stopPropagation()"><div class="flex justify-between items-start mb-4"><h3 class="text-2xl font-bold text-white">Google Advanced Data Analytics Capstone</h3><button onclick="closeModal('project4')" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="x" class="w-8 h-8"></i></button></div><div class="space-y-4 text-slate-300"><p>This project analyzed HR data for Salifort Motors to identify the key drivers of employee churn. The primary goal was to build a predictive model that could identify at-risk employees, allowing HR to implement proactive retention strategies.</p><h4 class="font-semibold text-white pt-2">Key Activities:</h4><ul class="list-disc pl-5 space-y-1"><li>Built and evaluated a Random Forest Classifier, achieving 98.6% accuracy in predicting employee attrition.</li><li>Identified satisfaction level, tenure, and number of projects as the most critical factors influencing churn.</li><li>Discovered three distinct profiles of departing employees: the under-appreciated, the overworked, and the under-engaged.</li><li>Provided actionable recommendations, including deploying the model for risk scoring and implementing targeted career development programs.</li></ul><a href="https://github.com/ShyHasVan/Google-ADA-Capstone" target="_blank" class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300 group mt-4">View on GitHub <i data-lucide="arrow-right" class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i></a></div></div></div>
     </div>
 
     <footer class="bg-black/30 text-slate-400 mt-16">
@@ -343,6 +485,15 @@
             </div>
         </div>
     </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" title="Go to top">
+        <i data-lucide="arrow-up"></i>
+    </button>
+    
+    <!-- Toast notification container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] space-y-2"></div>
+
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -547,8 +698,8 @@
                 modal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
                 setTimeout(() => {
-                    modal.querySelector('.modal-overlay')?.classList.remove('opacity-0');
-                    modal.querySelector('.modal-container')?.classList.remove('scale-95');
+                    modal.classList.remove('opacity-0');
+                    modal.querySelector('.modal-container')?.classList.remove('opacity-0', 'scale-95');
                 }, 10);
             }
         }
@@ -556,8 +707,8 @@
         function closeModal(projectId) {
             const modal = document.getElementById(`modal-${projectId}`);
             if (modal) {
-                modal.querySelector('.modal-overlay')?.classList.add('opacity-0');
-                modal.querySelector('.modal-container')?.classList.add('scale-95');
+                modal.classList.add('opacity-0');
+                modal.querySelector('.modal-container')?.classList.add('opacity-0', 'scale-95');
                 setTimeout(() => {
                     modal.classList.add('hidden');
                     document.body.style.overflow = '';
@@ -570,7 +721,41 @@
                 document.querySelectorAll('.modal-overlay:not(.hidden)').forEach(m => closeModal(m.id.split('-')[1]));
             }
         });
+
+        // --- Back to Top Button Logic ---
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // --- Toast Notification Logic ---
+        // This function remains in case you want to use it for other notifications.
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000); // Remove toast after 3 seconds
+        }
+
     </script>
 </body>
 </html>
+
+
+
+
+
+
 
